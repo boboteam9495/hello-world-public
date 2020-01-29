@@ -1,2 +1,2 @@
 # hello-world-public
-our every first github coop project
+our bobo group very first github cooperated project
