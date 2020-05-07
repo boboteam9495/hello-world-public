@@ -1,0 +1,28 @@
+How to integrate github with localhost jenkins
+
+Tools to use: - socketxp/ngrok
+
+1) download socketxp client in linux machine
+
+$socketxp relay http://192.168.0.110:8080/github-webhook/
+- 192.168.0.110:8080 is jenkins localhost ip address
+
+
+2) configure github
+	- settings >> github webhook
+	- configured public domain address from socketxp serviuces  
+	- for examples: https://webhook.socketxp.com/bobo-team9495-github-com-39223
+
+3) configure a jobs in jenkins
+- make sure github plugin is installed
+- create jobs with following configuration
+	- source code managenment:
+		- git
+		- repository url: https://github.com/boboteam9495/hello-world-public.git
+	- Build Triggers:
+		- Github hook trigger for GITScm polling
+- and set other settings
+
+
+Everything is set! jenkins will trigger the jobs automatically!
+Note: I created a socketxp account with boboteam github account, retrive the token from there by sign in with boboteam github account.
