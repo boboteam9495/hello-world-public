@@ -1,5 +1,2 @@
 # hello-world-public
-our every first github coop project
-make it normal
-
-leslie, aaron, ban 
+our bobo group very first github cooperated project
