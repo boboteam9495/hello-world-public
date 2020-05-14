@@ -13,6 +13,9 @@ pipeline {
                  	}
                  }
                  stage('Push') {
+			when {
+				branch 'master'
+			}
 			steps {
 				sh "./jenkins/push/push.sh"
 			}
