@@ -3,10 +3,9 @@ pipeline {
          stages {
                  stage('Build') {
                  	steps {
-				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
 				echo GIT_BRANCH
 				echo GIT_COMMIT
-				echo env
+				echo sh(script: 'env|sort', returnStdout: true)
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
                  	}
