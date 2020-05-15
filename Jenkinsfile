@@ -3,10 +3,11 @@ pipeline {
          stages {
                  stage('Build') {
                  	steps {
+				echo GIT_BRANCH
+				echo GIT_COMMIT
+				echo sh(script: 'env|sort', returnStdout: true)
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
-				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-				echo env.BRANCH
                  	}
                  }
                  stage('Test') {
@@ -16,11 +17,13 @@ pipeline {
                  }
                  stage('Push') {
 			 when {
-				 branch "master"
+				 expression {
+				 	GIT_BRANCH == "origin/master"
+				 }
 			 }
 			 steps {
 				sh "./jenkins/push/push.sh"
 			}
                  }
-}
+	}
 }
