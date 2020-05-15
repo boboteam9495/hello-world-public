@@ -3,12 +3,11 @@ pipeline {
          stages {
                  stage('Build') {
                  	steps {
-				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
 				echo GIT_BRANCH
-				final scmVars = checkout(scm)
-                                echo "scmVars: ${scmVars}"
-                                echo "scmVars.GIT_COMMIT: ${scmVars.GIT_COMMIT}"
-                                echo "scmVars.GIT_BRANCH: ${scmVars.GIT_BRANCH}"
+				scmInfo = checkout scm
+				echo "scm : ${scmInfo}"
+				echo "${scmInfo.GIT_COMMIT}"
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
                  	}
