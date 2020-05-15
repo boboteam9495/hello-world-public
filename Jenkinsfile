@@ -22,5 +22,5 @@ pipeline {
 				sh "./jenkins/push/push.sh"
 			}
                  }
-}
+	}
 }
