@@ -5,6 +5,7 @@ pipeline {
                  	steps {
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
+				echo BRANCH
                  	}
                  }
                  stage('Test') {
