@@ -5,9 +5,8 @@ pipeline {
                  	steps {
 				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
 				echo GIT_BRANCH
-				scmInfo = checkout scm
-				echo "scm : ${scmInfo}"
-				echo "${scmInfo.GIT_COMMIT}"
+				echo GIT_COMMIT
+				echo env
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
                  	}
