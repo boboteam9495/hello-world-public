@@ -5,7 +5,8 @@ pipeline {
                  	steps {
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
-				echo BRANCH
+				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				echo env.BRANCH
                  	}
                  }
                  stage('Test') {
@@ -15,7 +16,7 @@ pipeline {
                  }
                  stage('Push') {
 			 when {
-				 branch 'master'
+				 branch "master"
 			 }
 			 steps {
 				sh "./jenkins/push/push.sh"
