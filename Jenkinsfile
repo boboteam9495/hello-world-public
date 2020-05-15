@@ -17,7 +17,9 @@ pipeline {
                  }
                  stage('Push') {
 			 when {
-				 branch "master"
+				 expression {
+				 	GIT_BRANCH == "origin/master"
+				 }
 			 }
 			 steps {
 				sh "./jenkins/push/push.sh"
