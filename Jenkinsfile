@@ -3,10 +3,10 @@ pipeline {
          stages {
                  stage('Build') {
                  	steps {
+				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				echo env.BRANCH_NAME
                                 sh "./jenkins/build/mvn.sh mvn -B -DskipTests clean package"
                      		sh "./jenkins/build/build.sh"
-				echo 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-				echo env.BRANCH
                  	}
                  }
                  stage('Test') {
