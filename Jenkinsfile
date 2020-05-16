@@ -27,6 +27,9 @@ pipeline {
     			timeout(time: 1, unit: 'HOURS') {
       			input 'Push to Docker?'
     			}
+			steps {
+                		echo "The build was reviewed and approved."
+            		}
   		 }
                  stage('Push') {
 			 when {
