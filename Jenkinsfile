@@ -24,11 +24,8 @@ pipeline {
                                         GIT_BRANCH == "origin/master"
                                  }
 			}
-    			timeout(time: 1, unit: 'HOURS') {
-      			input 'Push to Docker?'
-    			}
 			steps {
-                		echo "The build was reviewed and approved."
+				input 'Push to Docker?'
             		}
   		 }
                  stage('Push') {
