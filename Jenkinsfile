@@ -18,6 +18,16 @@ pipeline {
                             })
                          }
                  }
+                 stage ('Approve') {
+			when {
+				expression {
+                                        GIT_BRANCH == "origin/master"
+                                 }
+			}
+    			timeout(time: 1, unit: 'HOURS') {
+      			input 'Push to Docker?'
+    			}
+  		 }
                  stage('Push') {
 			 when {
 				 expression {
